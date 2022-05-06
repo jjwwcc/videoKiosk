@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="custom.css">
+    <title>Basic Vanilla JavaScript Youtube Player- With playlist</title>
+</head>
+
+<body>
+    <!-- <div id="overlay">NEWS BAR </div> -->
+    <div class="player">
+        <div id="youtube"></div>
+    </div>
+
+    <div class="bar">
+        <div class="next">
+            <div class="info"><img
+                    src="https://b.thumbs.redditmedia.com/JuG0QpjkOZQ8Xvnu16HsP3_9AEIxhJv6xtN5OrMLHeI.jpg"
+                    class="thumbnail" id="next_thumbnail" alt="Thumbnail">
+                <span class="tags" id="next_tags"> <span class="tag small bg_poetry">POETRY</span></span>
+            </div>
+            <div id="next_title">Amber Heard Posing For A Picture With Her Tissue In Court For A Full 3 Seconds </div>
+        </div>
+    </div>
+
+
+    <script src="//www.youtube.com/iframe_api"></script>
+    <script>
+        var YouTubePlayer = {
+            current: 0,
+            player: null,
+            /**
+             * Tracks ids here...
+             */
+            videos: [],
+            currentlyPlaying: function () {
+                console.info('Current Track id', YouTubePlayer.videos[YouTubePlayer.current]);
+                return YouTubePlayer.videos[YouTubePlayer.current];
+            },
+            playNext: function () {
+                YouTubePlayer.increaseTrack()
+                if (YouTubePlayer.player) {
+                    YouTubePlayer.currentlyPlaying();
+                    YouTubePlayer.player.loadVideoById(YouTubePlayer.videos[YouTubePlayer.current]);
+                } else {
+                    alert('Please Wait! Player is loading');
+                }
+            },
+            playPrevious: function () {
+                YouTubePlayer.decreaseTrack()
+                if (YouTubePlayer.player) {
+                    YouTubePlayer.currentlyPlaying();
+                    YouTubePlayer.player.loadVideoById(YouTubePlayer.videos[YouTubePlayer.current]);
+                } else {
+                    alert('Please Wait! Player is loading');
+                }
+
+            },
+            increaseTrack: function () {
+                YouTubePlayer.current = YouTubePlayer.current + 1;
+                if (YouTubePlayer.current >= YouTubePlayer.videos.length) {
+                    YouTubePlayer.current = 0;
+                }
+            },
+            decreaseTrack: function () {
+                YouTubePlayer.current = Math.max(YouTubePlayer.current - 1, 0);
+            },
+            onReady: function (event) {
+                event.target.loadVideoById(YouTubePlayer.videos[YouTubePlayer.current]);
+            },
+            onStateChange: function (event) {
+                if (event.data == YT.PlayerState.ENDED) {
+                    YouTubePlayer.playNext();
+                }
+            }
+        }
+
+        function onYouTubeIframeAPIReady() {
+            YouTubePlayer.player = new YT.Player('youtube', {
+                height: '100%',
+                width: '100%',
+                events: {
+                    'onReady': YouTubePlayer.onReady,
+                    'onStateChange': YouTubePlayer.onStateChange
+                },
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'loop': 1,
+                    'modestbranding': 1,
+                    'rel': 0,
+                    'mute': 1,
+                    'autohide': 1,
+                    'origin': window.location.href
+
+                }
+            });
+        }
+
+        // 获取https://www.reddit.com/r/videos/hot.json 并解析
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://www.reddit.com/r/videos/hot.json', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    var posts = data.data.children;
+                    // 获取每一条信息的url
+                    for (var i = 0; i < posts.length; i++) {
+                        var post = posts[i].data;
+                        var url = post.url;
+                        // 判断是否是youtube视频
+                        if (url.indexOf('youtube.com') > -1) {
+                            // 获取视频id
+                            var id = url.split('v=')[1];
+                        }
+                        if (url.indexOf('youtu.be') > -1) {
+                            var id = url.split('youtu.be/')[1];
+                        }
+                        // 将视频id添加到数组
+                        YouTubePlayer.videos.push(id);
+                    }
+
+
+                }
+            }
+        }
+        xhr.send();
+
+                            
+    </script>
+</body>
+
+</html>

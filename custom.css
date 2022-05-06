@@ -1,0 +1,482 @@
+#overlay {
+    background: #000;
+    opacity: 0.5;
+    z-index: 50;
+    color: #fff;
+}
+
+
+* {
+    -webkit-tap-highlight-color: transparent;
+    -moz-tap-highlight-color: transparent
+}
+
+a,
+a:not(.no-hover):active,
+a:not(.no-hover):focus,
+a:not(.no-hover):hover {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+    font-family: Lato, sans-serif
+}
+
+.player {
+    margin: 0;
+    width: 100%;
+    height: calc(100vh - 50px);
+    z-index: 0
+}
+
+.logo {
+    display: block;
+    text-decoration: none;
+    position: absolute;
+    bottom: 80px;
+    left: 10px;
+    z-index: 100;
+    color: #fff;
+    cursor: pointer;
+    font-size: 25px;
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    padding: 7px;
+    font-size: 0;
+    opacity: .9;
+    transition: all .5s ease
+}
+
+.logo:not(.no-hover):hover {
+    background-color: rgba(0, 0, 0, .6);
+    text-decoration: none;
+    opacity: 1
+}
+
+.logo img {
+    width: 86px;
+    height: 26px
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 1000;
+    background: rgba(0, 0, 0, .5);
+    overflow-y: auto
+}
+
+.overlay .box {
+    position: relative;
+    color: #eee;
+    border: 2px solid #999;
+    width: 80%;
+    max-width: 600px;
+    font-size: 14px;
+    padding: 20px;
+    background: rgba(0, 0, 0, .5);
+    border-radius: 20px;
+    margin: 25px auto;
+    box-sizing: border-box
+}
+
+.overlay .box .tube {
+    display: inline-block;
+    padding: 2px;
+    background: #e52d27;
+    border-radius: 10px
+}
+
+.overlay .box h1 {
+    display: block;
+    margin: 0;
+    font-size: 30px;
+    text-align: center
+}
+
+.overlay .box .buttons {
+    text-align: center
+}
+
+.overlay .box .buttons .button {
+    display: inline-block;
+    text-decoration: none;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 10px;
+    background: #eee;
+    border: 1px solid #ccc
+}
+
+.overlay .box .buttons .button>span:not(.label) {
+    display: inline-block;
+    border-radius: 8px;
+    padding: 3px;
+    width: 30px;
+    text-align: center;
+    background: #e52d27;
+    border-bottom: 3px solid #b31217;
+    float: left;
+    color: #eee;
+    text-shadow: 0 0 5px #b31217
+}
+
+.overlay .box .buttons .button>span:not(.label).back {
+    background: #666;
+    border-bottom: 3px solid #444;
+    text-shadow: 0 0 5px #444
+}
+
+.overlay .box .buttons .button>span:not(.label).success {
+    background: #29b31e;
+    border-bottom: 3px solid #1c7914;
+    text-shadow: 0 0 5px #1c7914
+}
+
+.overlay .box .buttons .button>span:not(.label).danger {
+    background: #666;
+    border-bottom: 3px solid #444;
+    text-shadow: 0 0 5px #444
+}
+
+.overlay .box .buttons .button span.label {
+    cursor: pointer;
+    font-size: 13px;
+    color: #333;
+    display: inline-block;
+    padding: 8px 20px 0;
+    text-align: center;
+    width: 130px
+}
+
+.overlay .box .fa.shortcut {
+    font-size: 12px;
+    background-color: #353535;
+    display: inline-block;
+    width: 15px;
+    padding: 2px;
+    border-radius: 13px;
+    text-align: center;
+    color: #eee;
+    border: 1px solid #999
+}
+
+.bar {
+    position: absolute;
+    height: 69px;
+    background: #222;
+    width: 100%;
+    bottom: 0;
+    border-top: 2px solid #444
+}
+
+.bar .current {
+    color: #fff;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    text-align: right;
+    width: 45%;
+    overflow: hidden
+}
+
+.bar .volume {
+    width: 60px;
+    height: 150px;
+    position: absolute;
+    bottom: 90px;
+    right: 0
+}
+
+.bar .volume .volume_container {
+    border-radius: 20px;
+    background: #333;
+    width: 10px;
+    height: 100px;
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+    padding: 5px;
+    cursor: pointer
+}
+
+.bar .volume .volume_container .volume_box {
+    position: relative;
+    width: 100%;
+    height: 100%
+}
+
+.bar .volume .volume_container .volume_box .volume_space {
+    z-index: 100;
+    border-radius: 10px;
+    background-image: linear-gradient(to left, #eee, #ccc);
+    height: 100%;
+    width: 10px
+}
+
+.bar .volume .volume_container .volume_box .volume_bar {
+    z-index: 102;
+    border-radius: 10px;
+    background-color: red;
+    background-image: linear-gradient(to right, #b31217, #e52d27);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 10px
+}
+
+.bar .buttons {
+    position: absolute;
+    z-index: 100;
+    right: 10px;
+    bottom: 51px;
+    text-align: right;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden
+}
+
+.bar .buttons .button {
+    display: inline-block;
+    border-radius: 100px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    width: 20px;
+    height: 20px;
+    margin: 0 0 0 10px;
+    border-bottom: 1px solid #000;
+    text-shadow: 0 0 3px #000;
+    color: #aaa;
+    background-color: #353535;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    transition: color .5s ease
+}
+
+.bar .buttons .button i {
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    right: 0;
+    left: 0
+}
+
+.bar .buttons .button:not(.no-hover):hover {
+    color: #fff
+}
+
+.bar .next {
+    color: #aaa;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden
+}
+
+.bar .next .thumbnail {
+    background: #000;
+    margin-right: 10px;
+    height: 70px;
+    width: 93px;
+    float: left
+}
+
+.bar .title {
+    width: 100%;
+    font-size: 14px;
+    overflow: hidden;
+    text-decoration: none
+}
+
+.bar .title .info {
+    color: #ccc;
+    font-size: 12px;
+    margin-top: 2px
+}
+
+.bar .title .info span {
+    display: inline-block
+}
+
+.bar a.title:not(.no-hover):hover {
+    text-decoration: none !important
+}
+
+.bar a.title:not(.no-hover):hover #title {
+    text-decoration: underline !important
+}
+
+.bar #title {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px
+}
+
+.bar #next_title,
+.bar #title {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.progressbar_block {
+    position: absolute;
+    bottom: 0;
+    background: 0 0;
+    height: 4px;
+    width: 100%;
+    z-index: 200;
+    text-align: right;
+    font-size: 0;
+    overflow: hidden
+}
+
+.progressbar_block .progressbar {
+    height: 4px;
+    display: inline-block;
+    background: #f42323;
+    background-image: linear-gradient(to bottom, #b31217, #e52d27);
+    transition: width .1s ease
+}
+
+.progressbar_block .progressbar.buffering:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    animation: move 2s linear infinite;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+    z-index: 100;
+    background-size: 20px 20px;
+    animation: move 2s linear infinite;
+    overflow: hidden
+}
+
+@keyframes move {
+    0% {
+        background-position: 0 0
+    }
+
+    100% {
+        background-position: 20px 20px
+    }
+}
+
+.tag {
+    border: 1px solid #eee;
+    font-weight: 700;
+    color: #ccc;
+    display: inline-block;
+    font-size: 8px;
+    padding: 1px 3px;
+    border-radius: 5px;
+    background: #333;
+    text-transform: uppercase
+}
+
+.bg_other {
+    background: #333 !important;
+    color: #eee
+}
+
+.bg_other span.label {
+    color: #eee !important
+}
+
+.bg_haiku {
+    background-color: #191cc1 !important;
+    color: #eee
+}
+
+.bg_haiku span.label {
+    color: #eee !important
+}
+
+.bg_meme {
+    background-color: #a10000 !important;
+    color: #eee
+}
+
+.bg_meme span.label {
+    color: #eee !important
+}
+
+.bg_poetry {
+    background-color: #ead00e !important;
+    color: #333
+}
+
+.bg_poetry span.label {
+    color: #333 !important
+}
+
+kbd {
+    display: inline;
+    display: inline-block;
+    min-width: 1em;
+    padding: .2em .3em;
+    font: normal .85em/1 "Lucida Grande", Lucida, Arial, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    -moz-border-radius: .3em;
+    -webkit-border-radius: .3em;
+    border-radius: .3em;
+    border: none;
+    cursor: default;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    background: #fafafa;
+    background: -moz-linear-gradient(top, #d2d2d2, #fff);
+    background: -webkit-gradient(linear, left top, left bottom, from(#d2d2d2), to(white));
+    color: #323232;
+    text-shadow: 0 0 2px #fff;
+    -moz-box-shadow: inset 0 0 1px #fff, inset 0 0 .4em #c8c8c8, 0 .1em 0 #828282, 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+    -webkit-box-shadow: inset 0 0 1px #fff, inset 0 0 .4em #c8c8c8, 0 .1em 0 #828282, 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+    box-shadow: inset 0 0 1px #fff, inset 0 0 .4em #c8c8c8, 0 .1em 0 #828282, 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9)
+}
+
+kbd[title] {
+    cursor: help
+}
+
+@media screen and (max-width:600px) {
+    .bar .next {
+        display: none
+    }
+
+    .bar .buttons,
+    .bar .current {
+        width: 90%
+    }
+
+    .bar #button_repeat {
+        display: none
+    }
+
+    .overlay .box {
+        margin: 0;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        max-width: 100%;
+        width: 100%;
+        border: 0;
+        border-radius: 0
+    }
+}
